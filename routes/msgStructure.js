@@ -60,24 +60,33 @@ router.get('/specificStucture/:structureId/sorted', async(req, res) => {
         console.log(id)
         const specificStructure =  await messagesStructure.aggregate([
             {"$match" : {_id : id}},
+            
+
           { "$unwind" : "$messages" },
           { "$sort" : {
               "messages.date" : -1
           }
         },
-        {"$group" : {
-            "_id" : "$_id",
+
+        {"$project" : {
+            "users" : 1,
+             "date" : 1,
+             "messages": 1}
+        }
+        // {"$group" : {
+        //     "_id" : "$_id",
+        //     "users" :"$users",
             
 
-            "messages": {
-                "$push": "$messages"
-            }
-        }}
+        //     "messages": {
+        //         "$push": "$messages"
+        //     }
+        // }}
 
         ])
 
-        let data = JSON.stringify(specificStructure)
-        fs.writeFileSync('messages-sorted.json', data)
+        // let data = JSON.stringify(specificStructure)
+        // fs.writeFileSync('messages-sorted.json', data)
         
          res.json(specificStructure)
         
