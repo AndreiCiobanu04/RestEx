@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 
 const userSchema = mongoose.Schema({
-    name: String,
-    email: String,
-    phone: String,
+    name: { type: String, required: true},
+    email: {type: String, required: true},
+    phone: {type: String, required: true}
 
 })
 
 const messageSchema = mongoose.Schema({
-    date: Date,
-    sender: String,
-    receiver: String,
-    message_content: String
+    date: {type: Date, required: true},
+    sender: {type: String, required: true},
+    receiver: {type: String, required:  true},
+    message_content:{type: String, required: true}
 })
 
 
@@ -20,9 +20,9 @@ const messageSchema = mongoose.Schema({
 
 const messagesStructureSchema = mongoose.Schema({
 
-    users: [userSchema],
-    date: Date,
-    messages: [messageSchema]
+    users: {type: [userSchema], required :true },
+    date: {type: Date, required: true},
+    messages: { type : [messageSchema] , required:true}
 
 })
 

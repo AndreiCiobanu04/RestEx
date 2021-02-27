@@ -13,7 +13,7 @@ router.post('/addMessageStructure', async (req, res) => {
         res.json(savedStructure)
     }
     catch (err) {
-        res.json({ message: err })
+        res.status(400).json(err)
 
     }
 })
@@ -53,8 +53,18 @@ router.delete('/deleteStructure/:structureId', async (req, res) => {
     }
 })
 
+router.get('/specificStructure/:structureId', async(req,res) => {
+    try{
+        const structure = await messagesStructure.findById({_id: req.params.structureId})
+        res.json(structure)
+    }
+    catch(err){
+        res.json({message:err})
+    }
+})
 
-router.get('/specificStucture/:structureId/sorted', async(req, res) => {
+
+router.get('/specificStructure/:structureId/sorted', async(req, res) => {
     try {
         const id = mongoose.Types.ObjectId(req.params.structureId)
         console.log(id)
