@@ -32,15 +32,7 @@ const WelcomePage = () => {
 
     }
 
-    const ErrorMessage = ({ fieldName }) => (
-        <Field
-            name={fieldName}
-            render={({ form }) => {
-                const error = getIn(form.errors, fieldName);
-                return error ? error : null
-            }}
-        />
-    );
+    
 
     const validationSchema = yup.object().shape({
         users: yup.array().of(
@@ -59,37 +51,9 @@ const WelcomePage = () => {
         ).min(1, 'At least one message')
     })
 
-    function validate() { }
-
-    // function validate(values){
-    //     let errors = {}
-    //     if(!values.users.name){
-    //         errors.name = 'Enter your name'
-    //     }
-
-    //     if(!values.users.email){
-    //         errors.email = 'Enter a valid email address'
-    //     }
-
-    //     if(!values.users.phone || values.users.email.length !== 10){
-    //         errors.phone =' Enter a valid phone number'
-    //     }
-    //     if(!values.messages.sender){
-    //         errors.sender = 'Enter sender name'
-    //     }
-
-    //     if(!values.messages.receiver){
-    //         errors.receiver = 'Enter receiver name'
-    //     }
-
-    //     if(!values.messages.message_content){
-    //         errors.message_content = 'Enter a content'
-    //     }
-    //     return errors
 
 
-
-    // }
+    
 
 
 
@@ -145,7 +109,7 @@ const WelcomePage = () => {
             }}
 
                 onSubmit={(values) => onSubmit(values)}
-                validate={validate}
+                
                 validateOnChange={true}
                 validateOnBlur={false}
                 enableReinitialize={true}
