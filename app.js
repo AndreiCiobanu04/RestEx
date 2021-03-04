@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const verify = require('./routes/privateRoutes')
 
 
 app.use(bodyParser.json());
@@ -9,10 +10,15 @@ mongoose.connect('mongodb://localhost:27017/messages_db', { useNewUrlParser: tru
     console.log('connected to DB!')
 })
 
+
 // routes for User
-app.get('/', (req, res) => {
+app.get('/',verify, (req, res) => {
     res.send('Homepage test')
 });
+
+
+const authRoute = require('./routes/auth')
+app.use('/api/user', authRoute)
 
 const usersRoute = require('./routes/users')
 app.use('/users', usersRoute)
