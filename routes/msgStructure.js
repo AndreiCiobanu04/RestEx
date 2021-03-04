@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const {messagesStructure } = require('../models/messagesStucture');
 const fs = require('fs')
+const verify = require('./privateRoutes')
 
-router.post('/addMessageStructure', async (req, res) => {
+
+router.post('/addMessageStructure', verify, async (req, res) => {
     const newStructure = new messagesStructure({
         ...req.body
     })
@@ -18,7 +20,7 @@ router.post('/addMessageStructure', async (req, res) => {
     }
 })
 
-router.get('/allMessageStructures', async (req, res) => {
+router.get('/allMessageStructures', verify, async (req, res) => {
     try {
         const structures = await messagesStructure.find();
         res.json(structures);
@@ -41,7 +43,7 @@ router.put('/updateStructure/:structureId', async (req, res) => {
     }
 })
 
-router.delete('/deleteStructure/:structureId', async (req, res) => {
+router.delete('/deleteStructure/:structureId', verify, async (req, res) => {
     try {
         const removedStructure = await messagesStructure.deleteOne({ _id: req.params.structureId })
         res.json(removedStructure)
