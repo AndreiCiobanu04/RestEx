@@ -78,7 +78,7 @@ import { useDispatch, useSelector, useStore } from 'react-redux';
             <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>Messages in structure with id : {activeMessage._id}</Modal.Header>
                                     <Modal.Body>
-                                        {activeMessage.length> 0 ? activeMessage.messages.map(msg => (
+                                        {activeMessage.messages.length> 0 ? activeMessage.messages.map(msg => (
                                             <div key={msg.date}>{msg.message_content}</div>
                                         )): []}
                                     </Modal.Body>
